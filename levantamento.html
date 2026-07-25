@@ -45,22 +45,8 @@
     --mono: ui-monospace, "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0B1020; --bg-subtle: #121933; --surface: #131B33;
-      --ink: #F3F5FA; --ink-2: #B9C0D4; --ink-3: #7D879E;
-      --line: rgba(255,255,255,0.11); --line-2: rgba(255,255,255,0.06);
-      --mid: #35BEE0; --teal: #2FD0D1; --red-soft: rgba(248,113,113,0.12);
-      --shadow-sm: 0 1px 2px rgba(0,0,0,.3); --shadow: 0 12px 32px -14px rgba(0,0,0,.5), 0 4px 12px -6px rgba(33,169,210,.2);
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #0B1020; --bg-subtle: #121933; --surface: #131B33;
-    --ink: #F3F5FA; --ink-2: #B9C0D4; --ink-3: #7D879E;
-    --line: rgba(255,255,255,0.11); --line-2: rgba(255,255,255,0.06);
-    --mid: #35BEE0; --teal: #2FD0D1; --red-soft: rgba(248,113,113,0.12);
-    --shadow-sm: 0 1px 2px rgba(0,0,0,.3); --shadow: 0 12px 32px -14px rgba(0,0,0,.5), 0 4px 12px -6px rgba(33,169,210,.2);
-  }
+  /* Deliberately light-only: conexusprojects.tech has no dark theme, so this page
+     doesn't follow the visitor's OS preference either — it always renders like the brand. */
   :root[data-theme="light"] {
     --bg: #FFFFFF; --bg-subtle: #F5F7FB; --surface: #FFFFFF;
     --ink: #0B1020; --ink-2: #3A4356; --ink-3: #6B7488;
