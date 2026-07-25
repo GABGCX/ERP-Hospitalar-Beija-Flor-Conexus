@@ -31,11 +31,13 @@
     --line-2: rgba(13,22,48,0.055);
     --blue: #2F449F;
     --blue-700: #263A86;
+    --blue-tint: rgba(47,68,159,0.08);
     --mid: #21A9D2;
     --teal: #1FAFB0;
+    --teal-tint: rgba(31,175,176,0.1);
     --grad: linear-gradient(100deg, var(--blue) 0%, var(--mid) 48%, var(--teal) 100%);
     --red: #F87171;
-    --red-soft: rgba(248,113,113,0.08);
+    --red-tint: rgba(248,113,113,0.09);
     --r: 14px;
     --shadow-sm: 0 1px 2px rgba(13,22,48,.06), 0 1px 1px rgba(13,22,48,.04);
     --shadow: 0 12px 32px -14px rgba(13,22,48,.2), 0 4px 12px -6px rgba(47,68,159,.14);
@@ -51,7 +53,7 @@
     --bg: #FFFFFF; --bg-subtle: #F5F7FB; --surface: #FFFFFF;
     --ink: #0B1020; --ink-2: #3A4356; --ink-3: #6B7488;
     --line: rgba(13,22,48,0.09); --line-2: rgba(13,22,48,0.055);
-    --mid: #21A9D2; --teal: #1FAFB0; --red-soft: rgba(248,113,113,0.08);
+    --mid: #21A9D2; --teal: #1FAFB0;
     --shadow-sm: 0 1px 2px rgba(13,22,48,.06), 0 1px 1px rgba(13,22,48,.04); --shadow: 0 12px 32px -14px rgba(13,22,48,.2), 0 4px 12px -6px rgba(47,68,159,.14);
   }
 
@@ -65,15 +67,29 @@
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 { font-family: var(--display); font-weight: 700; text-wrap: balance; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; text-wrap: balance; }
   a { color: var(--blue); }
   a:focus-visible, input:focus-visible, button:focus-visible, summary:focus-visible {
     outline: 2px solid var(--blue); outline-offset: 2px;
   }
 
+  /* icon system */
+  .i { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .icon-badge {
+    width: 38px; height: 38px; border-radius: 11px; flex: none;
+    background: var(--blue-tint); color: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .icon-badge svg { width: 18px; height: 18px; }
+  .icon-badge.red { background: var(--red-tint); color: var(--red); }
+  .icon-badge.sm { width: 30px; height: 30px; border-radius: 9px; }
+  .icon-badge.sm svg { width: 15px; height: 15px; }
+
   .page { max-width: 1180px; margin: 0 auto; padding: 3rem 1.5rem 7rem; }
 
-  .masthead { max-width: 68ch; margin-bottom: 2.6rem; }
+  .masthead { max-width: 68ch; margin-bottom: 2.6rem; display: flex; gap: 1.1rem; align-items: flex-start; }
+  .masthead .icon-badge { width: 50px; height: 50px; border-radius: 13px; margin-top: .3rem; }
+  .masthead .icon-badge svg { width: 24px; height: 24px; }
   .eyebrow {
     display: inline-flex; align-items: center; gap: .55rem;
     font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .13em;
@@ -82,12 +98,14 @@
     box-shadow: var(--shadow-sm); margin: 0 0 .9rem;
   }
   .eyebrow .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--grad); flex: none; }
-  .masthead h1 { font-size: clamp(1.6rem, 3.6vw, 2.35rem); color: var(--ink); margin: 0 0 .8rem; letter-spacing: -.03em; line-height: 1.15; }
+  .masthead h1 { font-size: clamp(1.6rem, 3.6vw, 2.4rem); color: var(--ink); margin: 0 0 .8rem; letter-spacing: -.03em; line-height: 1.12; }
   .masthead p { color: var(--ink-2); font-size: 1rem; max-width: 62ch; margin: 0 0 1.1rem; }
   .masthead .meta {
     display: flex; flex-wrap: wrap; gap: .5rem 1.6rem;
     font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; color: var(--ink-3);
   }
+  .back-link { display: inline-flex; align-items: center; gap: .35rem; margin-top: 1.1rem; color: var(--blue); font-weight: 600; text-decoration: none; font-size: .9rem; }
+  .back-link svg { width: 14px; height: 14px; }
 
   .layout { display: grid; grid-template-columns: 244px 1fr; gap: 3rem; align-items: start; }
   @media (max-width: 900px) {
@@ -95,26 +113,29 @@
     .toc { position: static !important; order: -1; margin-bottom: 2rem; }
   }
 
-  /* ---------- TOC / progress ---------- */
+  /* ---------- TOC / progress ring ---------- */
   .toc {
     position: sticky; top: 1.5rem;
     background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 1.1rem 1.1rem 1.2rem; box-shadow: var(--shadow-sm);
+    padding: 1.2rem 1.1rem 1.2rem; box-shadow: var(--shadow-sm);
   }
-  .toc .cov-label { font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 .4rem; }
-  .toc .cov-num { font-family: var(--display); font-weight: 700; font-size: 1.5rem; font-variant-numeric: tabular-nums; margin: 0 0 .5rem; color: var(--ink); }
-  .toc .cov-num .of { font-size: 1rem; color: var(--ink-3); font-weight: 400; font-family: var(--sans); }
-  .bar { height: 5px; border-radius: 3px; background: var(--bg-subtle); overflow: hidden; margin-bottom: 1rem; }
-  .bar > i { display: block; height: 100%; width: 0%; background: var(--grad); transition: width .25s ease; }
+  .cov-label { font-family: var(--mono); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); text-align: center; margin: 0 0 .8rem; }
+  .ring { position: relative; width: 108px; height: 108px; margin: 0 auto 1rem; }
+  .ring-fill { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(var(--blue) calc(var(--pct, 0) * 3.6deg), var(--line) 0); transition: background .3s ease; }
+  .ring-center { position: absolute; inset: 9px; border-radius: 50%; background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .ring-center .cov-num { font-family: var(--display); font-weight: 800; font-size: 1.55rem; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1; }
+  .ring-center .cov-of { font-family: var(--sans); font-size: .68rem; color: var(--ink-3); margin-top: .15rem; }
   .toc nav { display: grid; gap: .05rem; }
   .toc nav a {
-    display: block; text-decoration: none; color: var(--ink-2);
+    display: flex; align-items: center; gap: .55rem; text-decoration: none; color: var(--ink-2);
     font-size: .84rem; padding: .38rem .5rem; border-radius: 6px;
     border-left: 2px solid transparent;
   }
+  .toc nav a svg { width: 14px; height: 14px; flex: none; color: var(--ink-3); }
   .toc nav a.sub { padding-left: 1.1rem; font-size: .8rem; }
   .toc nav a:hover { background: var(--bg-subtle); color: var(--ink); }
   .toc nav a.on { color: var(--blue); border-left-color: var(--teal); background: rgba(47,68,159,.05); font-weight: 600; }
+  .toc nav a.on svg { color: var(--blue); }
   .toc .reset {
     margin-top: 1rem; width: 100%; padding: .5rem .7rem;
     font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .04em;
@@ -132,16 +153,18 @@
   }
   @media (max-width: 560px) { section.panel { padding: 1.3rem 1.1rem 1.5rem; } }
 
-  .panel-head { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; margin-bottom: .5rem; }
-  .panel-head .no { font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; color: var(--teal); }
-  .panel-head h2 { font-size: 1.3rem; margin: 0; color: var(--ink); }
-  .panel-head .time { font-family: var(--mono); font-size: .72rem; color: var(--ink-3); letter-spacing: .04em; margin-left: auto; }
+  .panel-head { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; margin-bottom: .5rem; }
+  .panel-head .htext { display: flex; flex-direction: column; }
+  .panel-head .no { font-family: var(--mono); font-size: .7rem; letter-spacing: .1em; color: var(--teal); }
+  .panel-head h2 { font-size: 1.28rem; margin: 0; color: var(--ink); }
+  .panel-head .time { font-family: var(--mono); font-size: .72rem; color: var(--ink-3); letter-spacing: .04em; margin-left: auto; white-space: nowrap; }
   .panel-intro { color: var(--ink-2); font-size: .92rem; max-width: 68ch; margin: .3rem 0 1.3rem; }
 
   /* checklist */
   ul.qlist { list-style: none; margin: 0; padding: 0; display: grid; gap: .1rem; }
-  li.q-item { border-top: 1px solid var(--line); padding: .7rem 0; }
-  li.q-item:first-child { border-top: none; padding-top: 0; }
+  li.q-item { border-top: 1px solid var(--line); padding: .7rem .5rem; margin: 0 -.5rem; border-radius: 8px; transition: background .15s ease; }
+  li.q-item:first-child { border-top: none; }
+  li.q-item:hover { background: var(--bg-subtle); }
   li.q-item label { display: flex; align-items: flex-start; gap: .7rem; cursor: pointer; }
   li.q-item input[type="checkbox"] {
     appearance: none; -webkit-appearance: none;
@@ -178,6 +201,7 @@
   .roster { display: grid; gap: .7rem; grid-template-columns: repeat(2, 1fr); margin-top: .2rem; }
   @media (max-width: 620px) { .roster { grid-template-columns: 1fr; } }
   .roster .r {
+    display: flex; gap: .75rem;
     border: 1px solid var(--line); border-radius: 10px; padding: .8rem .95rem; background: var(--bg-subtle);
   }
   .roster .r .role { font-weight: 700; font-size: .88rem; font-family: var(--display); color: var(--ink); }
@@ -189,6 +213,7 @@
   .agenda th { text-align: left; font-family: var(--mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; padding: 0 .6rem .5rem 0; border-bottom: 1px solid var(--line); }
   .agenda td { padding: .55rem .6rem .55rem 0; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); }
   .agenda tr:last-child td { border-bottom: none; }
+  .agenda tr:not(.total):hover td { background: var(--bg-subtle); }
   .agenda td.t { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--teal); white-space: nowrap; }
   .agenda tr.total td { font-weight: 700; color: var(--ink); border-top: 2px solid var(--ink-3); border-bottom: none; padding-top: .7rem; }
   .agenda-wrap { overflow-x: auto; }
@@ -202,11 +227,11 @@
   /* red flags */
   .flags { display: grid; gap: .8rem; }
   .flag {
-    display: grid; grid-template-columns: minmax(220px, 1fr) 2fr; gap: 1.1rem;
+    display: grid; grid-template-columns: auto minmax(200px, 1fr) 2fr; align-items: start; gap: 1.1rem;
     border: 1px solid var(--line); border-left: 3px solid var(--red);
-    background: var(--red-soft); border-radius: 10px; padding: .9rem 1.1rem;
+    background: var(--red-tint); border-radius: 10px; padding: 1rem 1.1rem;
   }
-  @media (max-width: 640px) { .flag { grid-template-columns: 1fr; gap: .3rem; } }
+  @media (max-width: 640px) { .flag { grid-template-columns: 1fr; gap: .5rem; } }
   .flag .trigger { font-size: .89rem; font-weight: 700; font-family: var(--display); color: var(--ink); }
   .flag .action { font-size: .86rem; color: var(--ink-2); }
   .flag .action strong { color: var(--ink); }
@@ -225,40 +250,67 @@
 </style>
 </head>
 <body>
+<svg style="display:none" aria-hidden="true">
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></symbol>
+<symbol id="i-banknote" viewBox="0 0 24 24"><rect width="20" height="12" x="2" y="6" rx="2" /> <circle cx="12" cy="12" r="2" /> <path d="M6 12h.01M18 12h.01" /></symbol>
+<symbol id="i-building-2" viewBox="0 0 24 24"><path d="M10 12h4" /> <path d="M10 8h4" /> <path d="M14 21v-3a2 2 0 0 0-4 0v3" /> <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /> <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /></symbol>
+<symbol id="i-circle-check-big" viewBox="0 0 24 24"><path d="M21.801 10A10 10 0 1 1 17 3.335" /> <path d="m9 11 3 3L22 4" /></symbol>
+<symbol id="i-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="M12 11h4" /> <path d="M12 16h4" /> <path d="M8 11h.01" /> <path d="M8 16h.01" /></symbol>
+<symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5V19A9 3 0 0 0 21 19V5" /> <path d="M3 12A9 3 0 0 0 21 12" /></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></symbol>
+<symbol id="i-heart-pulse" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /> <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></symbol>
+<symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3" /> <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" /> <circle cx="18" cy="5" r="3" /></symbol>
+<symbol id="i-server" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2" ry="2" /> <rect width="20" height="8" x="2" y="14" rx="2" ry="2" /> <line x1="6" x2="6.01" y1="6" y2="6" /> <line x1="6" x2="6.01" y1="18" y2="18" /></symbol>
+<symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></symbol>
+<symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol>
+<symbol id="i-users-round" viewBox="0 0 24 24"><path d="M18 21a8 8 0 0 0-16 0" /> <circle cx="10" cy="8" r="5" /> <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol>
+</svg>
+
 <div class="page">
 
   <div class="masthead">
-    <p class="eyebrow"><span class="dot"></span>Conexus · Ferramenta de campo</p>
-    <h1>Guia de Levantamento: Associação Beija Flor</h1>
-    <p>Roteiro para conduzir a reunião de descoberta sem deixar escapar nenhum ponto crítico. Marque cada item conforme for coberto na conversa: o contador ao lado acompanha a cobertura em tempo real.</p>
-    <div class="meta">
-      <span>REUNIÃO · SEMANA DE 27 JUL 2026</span>
-      <span>DURAÇÃO ESTIMADA · 90–110 MIN</span>
-      <span>USO: AO VIVO NA REUNIÃO OU IMPRESSO</span>
+    <span class="icon-badge"><svg class="i"><use href="#i-clipboard-list"></use></svg></span>
+    <div>
+      <p class="eyebrow"><span class="dot"></span>Conexus · Ferramenta de campo</p>
+      <h1>Guia de Levantamento: Associação Beija Flor</h1>
+      <p>Roteiro para conduzir a reunião de descoberta sem deixar escapar nenhum ponto crítico. Marque cada item conforme for coberto na conversa: o contador ao lado acompanha a cobertura em tempo real.</p>
+      <div class="meta">
+        <span>REUNIÃO · SEMANA DE 27 JUL 2026</span>
+        <span>DURAÇÃO ESTIMADA · 90–110 MIN</span>
+        <span>USO: AO VIVO NA REUNIÃO OU IMPRESSO</span>
+      </div>
+      <a class="back-link" href="index.html"><svg style="transform:scaleX(-1)"><use href="#i-arrow-right"></use></svg>Ver apresentação estratégica</a>
     </div>
-    <p style="margin-top:1.1rem;"><a href="index.html" style="color:var(--blue);font-weight:600;text-decoration:none;font-size:.9rem;">← Ver apresentação estratégica</a></p>
   </div>
 
   <div class="layout">
     <aside class="toc" id="toc">
       <p class="cov-label">Cobertura do levantamento</p>
-      <p class="cov-num"><span id="covNum">0</span><span class="of"> / <span id="covTotal">0</span></span></p>
-      <div class="bar"><i id="covBar"></i></div>
+      <div class="ring">
+        <div class="ring-fill" id="ringFill"></div>
+        <div class="ring-center">
+          <span class="cov-num"><span id="covNum">0</span></span>
+          <span class="cov-of">de <span id="covTotal">0</span></span>
+        </div>
+      </div>
       <nav id="tocNav">
-        <a href="#prep">Antes da reunião</a>
-        <a href="#agenda">Agenda sugerida</a>
-        <a href="#b1" class="sub">1 · Contexto e objetivo</a>
-        <a href="#b2" class="sub">2 · Pessoas e papéis</a>
-        <a href="#b3" class="sub">3 · A jornada, hoje</a>
-        <a href="#b4" class="sub">4 · Regras clínicas</a>
-        <a href="#b5" class="sub">5 · Dados e migração</a>
-        <a href="#b6" class="sub">6 · Financeiro e captação</a>
-        <a href="#b7" class="sub">7 · LGPD e compliance</a>
-        <a href="#b8" class="sub">8 · Infraestrutura atual</a>
-        <a href="#b9" class="sub">9 · Orçamento e prazo</a>
-        <a href="#b10" class="sub">10 · Critérios de sucesso</a>
-        <a href="#flags">Sinais de alerta</a>
-        <a href="#after">Depois da reunião</a>
+        <a href="#prep"><svg class="i"><use href="#i-clipboard-list"></use></svg>Antes da reunião</a>
+        <a href="#agenda"><svg class="i"><use href="#i-calendar"></use></svg>Agenda sugerida</a>
+        <a href="#b1" class="sub"><svg class="i"><use href="#i-target"></use></svg>1 · Contexto e objetivo</a>
+        <a href="#b2" class="sub"><svg class="i"><use href="#i-users-round"></use></svg>2 · Pessoas e papéis</a>
+        <a href="#b3" class="sub"><svg class="i"><use href="#i-route"></use></svg>3 · A jornada, hoje</a>
+        <a href="#b4" class="sub"><svg class="i"><use href="#i-heart-pulse"></use></svg>4 · Regras clínicas</a>
+        <a href="#b5" class="sub"><svg class="i"><use href="#i-database"></use></svg>5 · Dados e migração</a>
+        <a href="#b6" class="sub"><svg class="i"><use href="#i-wallet"></use></svg>6 · Financeiro e captação</a>
+        <a href="#b7" class="sub"><svg class="i"><use href="#i-shield-check"></use></svg>7 · LGPD e compliance</a>
+        <a href="#b8" class="sub"><svg class="i"><use href="#i-server"></use></svg>8 · Infraestrutura atual</a>
+        <a href="#b9" class="sub"><svg class="i"><use href="#i-banknote"></use></svg>9 · Orçamento e prazo</a>
+        <a href="#b10" class="sub"><svg class="i"><use href="#i-flag"></use></svg>10 · Critérios de sucesso</a>
+        <a href="#flags"><svg class="i"><use href="#i-triangle-alert"></use></svg>Sinais de alerta</a>
+        <a href="#after"><svg class="i"><use href="#i-circle-check-big"></use></svg>Depois da reunião</a>
       </nav>
       <button class="reset" id="resetBtn" type="button">Limpar marcações</button>
     </aside>
@@ -266,7 +318,10 @@
     <main>
 
       <section class="panel" id="prep">
-        <div class="panel-head"><span class="no">PREPARAÇÃO</span><h2>Antes da reunião</h2></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-clipboard-list"></use></svg></span>
+          <div class="htext"><span class="no">PREPARAÇÃO</span><h2>Antes da reunião</h2></div>
+        </div>
         <p class="panel-intro">O levantamento começa antes de sentar à mesa. Estes cinco pontos evitam a reunião mais comum de todas: a que termina sem decisão porque faltou gente certa ou faltou pauta.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Confirmar com a associação quem estará presente: priorizar diretoria/decisor financeiro e coordenação clínica nesta primeira conversa.</span></label></li>
@@ -278,15 +333,18 @@
 
         <div class="callout" style="margin-top:1.6rem;"><strong>Quem precisa estar na sala</strong>: se não der para reunir todos de uma vez, priorize as duas primeiras linhas agora e agende uma segunda conversa para o operacional.</div>
         <div class="roster">
-          <div class="r"><div class="role">Diretoria / responsável institucional</div><p class="why">Decide orçamento e prioridade: sem essa pessoa, a proposta final não tem quem aprove.</p></div>
-          <div class="r"><div class="role">Coordenação clínica</div><p class="why">Fala a língua operacional real: protocolos, fluxo entre especialidades, exceções do dia a dia.</p></div>
-          <div class="r opt"><div class="role">Acolhimento / serviço social</div><p class="why">Primeira porta de entrada da família: conhece o volume real e onde o processo hoje trava.</p></div>
-          <div class="r opt"><div class="role">Financeiro / captação de recursos</div><p class="why">Sabe o que doadores e editais cobram em relatório: vira requisito direto do sistema.</p></div>
+          <div class="r"><span class="icon-badge sm"><svg class="i"><use href="#i-building-2"></use></svg></span><div><div class="role">Diretoria / responsável institucional</div><p class="why">Decide orçamento e prioridade: sem essa pessoa, a proposta final não tem quem aprove.</p></div></div>
+          <div class="r"><span class="icon-badge sm"><svg class="i"><use href="#i-heart-pulse"></use></svg></span><div><div class="role">Coordenação clínica</div><p class="why">Fala a língua operacional real: protocolos, fluxo entre especialidades, exceções do dia a dia.</p></div></div>
+          <div class="r opt"><span class="icon-badge sm"><svg class="i"><use href="#i-users-round"></use></svg></span><div><div class="role">Acolhimento / serviço social</div><p class="why">Primeira porta de entrada da família: conhece o volume real e onde o processo hoje trava.</p></div></div>
+          <div class="r opt"><span class="icon-badge sm"><svg class="i"><use href="#i-wallet"></use></svg></span><div><div class="role">Financeiro / captação de recursos</div><p class="why">Sabe o que doadores e editais cobram em relatório: vira requisito direto do sistema.</p></div></div>
         </div>
       </section>
 
       <section class="panel" id="agenda">
-        <div class="panel-head"><span class="no">ROTEIRO</span><h2>Agenda sugerida</h2></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-calendar"></use></svg></span>
+          <div class="htext"><span class="no">ROTEIRO</span><h2>Agenda sugerida</h2></div>
+        </div>
         <p class="panel-intro">Um total realista de ~100 minutos. Os blocos 3 e 4 são o coração da reunião: se o tempo apertar, corte primeiro nos blocos 5, 7 e 8, que podem virar formulário assíncrono depois.</p>
         <div class="agenda-wrap">
           <table class="agenda">
@@ -309,7 +367,11 @@
       </section>
 
       <section class="panel" id="b1">
-        <div class="panel-head"><span class="no">BLOCO 1</span><h2>Contexto e objetivo estratégico</h2><span class="time">~10 min</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-target"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 1</span><h2>Contexto e objetivo estratégico</h2></div>
+          <span class="time">~10 min</span>
+        </div>
         <p class="panel-intro">Antes de perguntar "o que vocês precisam", entenda por que isso virou prioridade agora: normalmente revela o prazo real por trás do prazo declarado.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Por que agora? O que mudou ou motivou buscar um sistema neste momento, além da obra do hospital?</span></label></li>
@@ -322,7 +384,11 @@
       </section>
 
       <section class="panel" id="b2">
-        <div class="panel-head"><span class="no">BLOCO 2</span><h2>Pessoas e papéis</h2><span class="time">~10 min</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-users-round"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 2</span><h2>Pessoas e papéis</h2></div>
+          <span class="time">~10 min</span>
+        </div>
         <p class="panel-intro">Define quem o sistema precisa servir de verdade, e quanto treinamento e simplicidade de interface serão necessários.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Quais especialidades ou setores vão usar o sistema no dia a dia (recepção, cirurgia, ortodontia, fono, psicologia, serviço social, financeiro, diretoria)?</span></label></li>
@@ -334,7 +400,11 @@
       </section>
 
       <section class="panel" id="b3">
-        <div class="panel-head"><span class="no">BLOCO 3</span><h2>A jornada real, hoje</h2><span class="time">~25 min · o mais importante</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-route"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 3</span><h2>A jornada real, hoje</h2></div>
+          <span class="time">~25 min · o mais importante</span>
+        </div>
         <p class="panel-intro">O núcleo do sistema é modelar esta jornada, não a versão ideal, mas a versão que realmente acontece hoje, com os atalhos e gambiarras incluídos.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Como uma família chega até vocês hoje, passo a passo: indicação médica, busca espontânea, encaminhamento de posto de saúde?</span></label></li>
@@ -351,7 +421,11 @@
       </section>
 
       <section class="panel" id="b4">
-        <div class="panel-head"><span class="no">BLOCO 4</span><h2>Regras clínicas e de negócio específicas</h2><span class="time">~15 min</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-heart-pulse"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 4</span><h2>Regras clínicas e de negócio específicas</h2></div>
+          <span class="time">~15 min</span>
+        </div>
         <p class="panel-intro">O que diferencia este sistema de um prontuário genérico. Aqui é onde erra quem tenta encaixar a Beija Flor num software de prateleira.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">O prontuário de vocês tem campos ou informações muito específicas da área (fissura labiopalatina etc.) que um prontuário genérico não teria?</span></label></li>
@@ -365,7 +439,11 @@
       </section>
 
       <section class="panel" id="b5">
-        <div class="panel-head"><span class="no">BLOCO 5</span><h2>Dados, histórico e migração</h2><span class="time">~10 min</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-database"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 5</span><h2>Dados, histórico e migração</h2></div>
+          <span class="time">~10 min</span>
+        </div>
         <p class="panel-intro">Define se o sistema nasce "do zero" na virada ou herda anos de histórico em papel: impacta prazo e esforço de forma direta.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Existe algum registro digital hoje, mesmo informal: planilha, Google Forms, sistema antigo abandonado?</span></label></li>
@@ -376,7 +454,11 @@
       </section>
 
       <section class="panel" id="b6">
-        <div class="panel-head"><span class="no">BLOCO 6</span><h2>Financeiro, captação e prestação de contas</h2><span class="time">~10 min</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-wallet"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 6</span><h2>Financeiro, captação e prestação de contas</h2></div>
+          <span class="time">~10 min</span>
+        </div>
         <p class="panel-intro">Uma resposta aqui pode mudar todo o escopo técnico: vale perguntar sem pressa.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">O atendimento é exclusivamente por doação/recursos próprios, ou também há atendimento via SUS ou convênio?</span> <span class="tag">essencial</span></label>
@@ -389,7 +471,11 @@
       </section>
 
       <section class="panel" id="b7">
-        <div class="panel-head"><span class="no">BLOCO 7</span><h2>LGPD e compliance</h2><span class="time">~10 min</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-shield-check"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 7</span><h2>LGPD e compliance</h2></div>
+          <span class="time">~10 min</span>
+        </div>
         <p class="panel-intro">Dados de saúde de crianças são dado sensível em dobro. Isso não é detalhe jurídico para depois: molda o desenho de acesso desde o primeiro módulo.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Existe hoje alguém responsável por dados/LGPD na associação, formal ou informalmente?</span></label></li>
@@ -401,7 +487,11 @@
       </section>
 
       <section class="panel" id="b8">
-        <div class="panel-head"><span class="no">BLOCO 8</span><h2>Infraestrutura e ambiente técnico atual</h2><span class="time">~10 min</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-server"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 8</span><h2>Infraestrutura e ambiente técnico atual</h2></div>
+          <span class="time">~10 min</span>
+        </div>
         <p class="panel-intro">Detalhes que evitam retrabalho na implantação: nada pior que um sistema pronto que ninguém consegue acessar direito no dia a dia.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Que equipamentos a equipe usa hoje: computador, tablet, celular pessoal?</span></label></li>
@@ -413,7 +503,11 @@
       </section>
 
       <section class="panel" id="b9">
-        <div class="panel-head"><span class="no">BLOCO 9</span><h2>Orçamento, prazo e modelo comercial</h2><span class="time">~10 min</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-banknote"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 9</span><h2>Orçamento, prazo e modelo comercial</h2></div>
+          <span class="time">~10 min</span>
+        </div>
         <p class="panel-intro">Revalidar ao vivo, com quem realmente decide o dinheiro, o que hoje só temos de segunda mão pela anotação da reunião anterior.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">O teto de R$ 50–60 mil citado é para o quê exatamente: implantação total? Só a primeira fase? Já inclui manutenção dos anos seguintes?</span> <span class="tag">essencial</span></label></li>
@@ -425,7 +519,11 @@
       </section>
 
       <section class="panel" id="b10">
-        <div class="panel-head"><span class="no">BLOCO 10</span><h2>Critérios de sucesso</h2><span class="time">~5 min</span></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-flag"></use></svg></span>
+          <div class="htext"><span class="no">BLOCO 10</span><h2>Critérios de sucesso</h2></div>
+          <span class="time">~5 min</span>
+        </div>
         <p class="panel-intro">Fechar a reunião definindo o alvo, não só a lista de funcionalidades.</p>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Daqui a 12 meses, o que precisa ser verdade para vocês dizerem "valeu a pena"?</span></label></li>
@@ -435,26 +533,34 @@
       </section>
 
       <section class="panel" id="flags">
-        <div class="panel-head"><span class="no">ATENÇÃO</span><h2>Sinais de alerta durante a conversa</h2></div>
+        <div class="panel-head">
+          <span class="icon-badge sm red"><svg class="i"><use href="#i-triangle-alert"></use></svg></span>
+          <div class="htext"><span class="no">ATENÇÃO</span><h2>Sinais de alerta durante a conversa</h2></div>
+        </div>
         <p class="panel-intro">Cinco respostas que, se aparecerem, merecem ser aprofundadas na hora, não anotadas para "ver depois".</p>
         <div class="flags">
           <div class="flag">
+            <span class="icon-badge sm red"><svg class="i"><use href="#i-wallet"></use></svg></span>
             <div class="trigger">Mencionarem atendimento via SUS ou convênio "de passagem"</div>
             <div class="action"><strong>Ação:</strong> aprofundar imediatamente: muda o escopo técnico (TISS, faturamento) de forma relevante para orçamento e prazo.</div>
           </div>
           <div class="flag">
+            <span class="icon-badge sm red"><svg class="i"><use href="#i-users-round"></use></svg></span>
             <div class="trigger">Não houver clareza sobre quem decide ou aprova</div>
             <div class="action"><strong>Ação:</strong> insistir em nomear um responsável antes de sair da sala: sem dono, o projeto não anda.</div>
           </div>
           <div class="flag">
+            <span class="icon-badge sm red"><svg class="i"><use href="#i-building-2"></use></svg></span>
             <div class="trigger">"Ano que vem" na prática significar "quando o hospital abrir", com data incerta</div>
             <div class="action"><strong>Ação:</strong> desacoplar o cronograma do sistema da obra civil: propor fases que entregam valor antes da inauguração.</div>
           </div>
           <div class="flag">
+            <span class="icon-badge sm red"><svg class="i"><use href="#i-shield-check"></use></svg></span>
             <div class="trigger">Surgir menção a informações muito sensíveis: fotos de crianças, casos de vulnerabilidade social</div>
             <div class="action"><strong>Ação:</strong> aprofundar como isso é tratado hoje e travar isso cedo no desenho de papéis de acesso.</div>
           </div>
           <div class="flag">
+            <span class="icon-badge sm red"><svg class="i"><use href="#i-banknote"></use></svg></span>
             <div class="trigger">Orçamento citado vier junto de expectativa de "sistema pronto para sempre, sem mensalidade"</div>
             <div class="action"><strong>Ação:</strong> alinhar o custo recorrente já nesta reunião: não deixar essa conversa para a proposta.</div>
           </div>
@@ -462,7 +568,10 @@
       </section>
 
       <section class="panel" id="after">
-        <div class="panel-head"><span class="no">FECHAMENTO</span><h2>Depois da reunião: nas próximas 48h</h2></div>
+        <div class="panel-head">
+          <span class="icon-badge sm"><svg class="i"><use href="#i-circle-check-big"></use></svg></span>
+          <div class="htext"><span class="no">FECHAMENTO</span><h2>Depois da reunião: nas próximas 48h</h2></div>
+        </div>
         <ul class="qlist">
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Consolidar as respostas neste mesmo roteiro: o que foi respondido e o que ficou em aberto.</span></label></li>
           <li class="q-item"><label><input type="checkbox" class="q"><span class="qtext">Transformar os gaps em pauta da segunda reunião ou em um formulário assíncrono curto.</span></label></li>
@@ -481,13 +590,14 @@
     var boxes = Array.prototype.slice.call(document.querySelectorAll('input.q'));
     var covNum = document.getElementById('covNum');
     var covTotal = document.getElementById('covTotal');
-    var covBar = document.getElementById('covBar');
+    var ringFill = document.getElementById('ringFill');
     covTotal.textContent = boxes.length;
 
     function update() {
       var checked = boxes.filter(function (b) { return b.checked; }).length;
       covNum.textContent = checked;
-      covBar.style.width = (boxes.length ? (checked / boxes.length) * 100 : 0) + '%';
+      var pct = boxes.length ? (checked / boxes.length) * 100 : 0;
+      ringFill.style.setProperty('--pct', pct);
     }
     boxes.forEach(function (b) { b.addEventListener('change', update); });
     update();
